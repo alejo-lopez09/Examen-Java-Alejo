@@ -177,3 +177,22 @@ Resultado de la última ejecución: **14 pruebas, 0 fallos y 0 errores**. Maven 
 | `MenuPrincipalTest` | 1 | Construcción del menú y salida limpia sin abrir una conexión JDBC. |
 
 Las pruebas de servicios usan repositorios sustitutos; por tanto, **no simulan ni sustituyen una prueba de integración con MySQL**. Para comprobar JDBC en el equipo de entrega, configura las variables de entorno de la sección MySQL, ejecuta `mvn exec:java -Dexec.mainClass=com.alejotech.crediya.Main` y verifica el listado de empleados/clientes, creación de un préstamo, registro de un pago, saldo e historial. También revisa `data/` después de una escritura exitosa. No se incluye una prueba automatizada que modifique una base real para evitar alterar datos del usuario.
+
+
+
+
+# EXAMEN
+
+
+### La nueva funcionalidad del examen esta echa en GestorPagos, aun faltan las pruebas pero la logica sirve
+
+
+- Prueba 1
+- Se probo y el codigo funciona correctamente, el unico defecto es que no lo guarda en los TXT
+
+
+
+- Prueba 2
+-  Se probo el codigo y todo funciono correctamente, se guardo en los TXT y se actualiza en la consola
+
+

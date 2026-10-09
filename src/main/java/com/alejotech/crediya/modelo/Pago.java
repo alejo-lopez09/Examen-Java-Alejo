@@ -12,6 +12,12 @@ public class Pago {
     private LocalDate fechaPago;
     private BigDecimal monto;
 
+
+    // Constructor Vacio
+    public Pago(){
+
+    }
+
     // Constructor completo
     public Pago(int id, Prestamo prestamo,
                 LocalDate fechaPago, BigDecimal monto) {
