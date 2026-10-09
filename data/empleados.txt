@@ -1,0 +1,2 @@
+1|Ana Torres|1001001001|Asesora|ana.torres@crediya.com|2500000.00
+2|Luis Rojas|1002002002|Coordinador|luis.rojas@crediya.com|3200000.00

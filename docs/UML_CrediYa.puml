@@ -1,0 +1,105 @@
+@startuml UML_CrediYa
+
+!pragma layout smetana
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "Vista" {
+  class Main
+  class MenuPrincipal
+  class MenuRespaldos
+  class "Menús de módulo\n(Empleados, Clientes,\nPréstamos, Pagos, Reportes)" as MenusModulo
+}
+
+package "Servicios" {
+  class EmpleadoService
+  class ClienteService
+  class PrestamoService
+  class PagoService
+}
+
+package "Modelo" {
+  abstract class Persona {
+    - id : int
+    - nombre : String
+    - documento : String
+    - correo : String
+    + getTipo() : String
+  }
+  class Empleado {
+    - rol : String
+    - salario : BigDecimal
+  }
+  class Cliente {
+    - telefono : String
+  }
+  class Prestamo {
+    - id : int
+    - monto : BigDecimal
+    - interes : BigDecimal
+    - cuotas : int
+    - fechaInicio : LocalDate
+    - estado : EstadoPrestamo
+    + calcularMontoTotal() : BigDecimal
+    + estaVencido(totalPagado, fechaConsulta) : boolean
+  }
+  class Pago {
+    - id : int
+    - fechaPago : LocalDate
+    - monto : BigDecimal
+  }
+  enum EstadoPrestamo {
+    PENDIENTE
+    PAGADO
+  }
+}
+
+package "Persistencia" {
+  interface "Contratos *Repository\n(Cliente, Empleado,\nPréstamo, Pago)" as Repositories
+  class "Adaptadores JDBC *DAO\n(Cliente, Empleado,\nPréstamo, Pago)" as JdbcDaos
+  class ConexionDB
+}
+
+package "Utilidades y errores" {
+  class ArchivoUtil
+  class Validaciones
+  class CrediYaException
+  class ValidacionException
+  class RecursoNoEncontradoException
+  class PagoExcedeSaldoException
+  class RecursoEnUsoException
+}
+
+Persona <|-- Empleado
+Persona <|-- Cliente
+Cliente "1" <-- "0..*" Prestamo : cliente
+Empleado "1" <-- "0..*" Prestamo : responsable
+Prestamo "1" <-- "0..*" Pago : pagos
+Prestamo --> EstadoPrestamo
+
+Main --> MenuPrincipal
+MenuPrincipal *-- MenusModulo
+MenuPrincipal *-- MenuRespaldos
+MenuRespaldos ..> ArchivoUtil : lee respaldos
+MenusModulo --> EmpleadoService
+MenusModulo --> ClienteService
+MenusModulo --> PrestamoService
+MenusModulo --> PagoService
+EmpleadoService --> Repositories
+ClienteService --> Repositories
+PrestamoService --> Repositories
+PagoService --> Repositories
+JdbcDaos ..> Repositories : implementan
+JdbcDaos --> ConexionDB
+EmpleadoService ..> ArchivoUtil
+ClienteService ..> ArchivoUtil
+PrestamoService ..> ArchivoUtil
+PagoService ..> ArchivoUtil
+PrestamoService ..> Validaciones
+PagoService ..> Validaciones
+CrediYaException <|-- ValidacionException
+CrediYaException <|-- RecursoNoEncontradoException
+CrediYaException <|-- PagoExcedeSaldoException
+CrediYaException <|-- RecursoEnUsoException
+
+@enduml
