@@ -4,11 +4,11 @@ Aplicación de consola Java para administrar empleados, clientes, préstamos y p
 
 ## Requisitos
 
-- JDK 17 o posterior.
-- Maven 3.8 o posterior.
+- JDK 25 o posterior.
+- Maven 3.9 o posterior.
 - MySQL 8.0 o posterior.
 
-El proyecto apunta a Java 17: los text blocks están disponibles desde Java 15 y `Stream.toList()` desde Java 16; el código no requiere Java 25.
+El proyecto se compila para Java 25 LTS. El código utiliza APIs estándar como text blocks y `Stream.toList()`, disponibles desde versiones anteriores de Java.
 
 ## Preparar MySQL
 
@@ -130,7 +130,7 @@ Proyecto_Java/
 |   |   `-- Main.java                  Punto de entrada de la aplicación
 |   `-- test/java/                     Pruebas unitarias y de consola
 |-- .gitignore
-|-- pom.xml                            Java 17, MySQL Connector/J y JUnit 5
+|-- pom.xml                            Java 25, MySQL Connector/J y JUnit 5
 `-- README.md
 ```
 
